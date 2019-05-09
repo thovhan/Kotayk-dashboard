@@ -1,6 +1,7 @@
 # Installing the required packages
-required.packages = c("sf", "sp", "rgdal", "leaflet", "shiny", "xlsx")
-new.packages = required.packages[!(required.packages %in% installed.packages()[, "Package"])]
+required.packages = c("sf", "sp", "rgdal", "leaflet", "shiny")
+new.packages = required.packages[!(required.packages 
+    %in% installed.packages()[, "Package"])]
 if (length(new.packages))
   install.packages(new.packages, dependencies = TRUE)
 
