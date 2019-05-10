@@ -1,21 +1,8 @@
 
-
 server <- function(input, output, session) {
   
-  ## Kotayk tab
-  kotaykData <- readOGR("Kotayk_Province", "kotayk")
-  kotaykData <- spTransform(kotaykData, CRS("+proj=longlat +datum=WGS84 +no_defs"))
-  
-  output$kotaykMap <- renderLeaflet({
-    # Use leaflet() here, and only include aspects of the map that
-    # won't need to change dynamically (at least, not unless the
-    # entire map is being torn down and recreated).
-    leaflet(kotaykData) %>% addTiles() %>% 
-      addPolygons(weight = 1, smoothFactor = 0.05,
-                  opacity = 1.0, fillOpacity = 0.05,, 
-                  highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE))
-  })
-  
+  source("kotayk_server.R")
+  kotayk_server(input, output, session)
   
   ## Armenia
   points <- eventReactive(input$recalc, {
