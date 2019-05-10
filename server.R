@@ -27,8 +27,8 @@ server <- function(input, output, session) {
   observeEvent(input$Map_shape_click, { # update the location selectInput on map clicks
     p <- input$Map_shape_click
     print(p$id) ## Id of the marz
-    tmp <- c(tmp, p$id)
-    print(tmp)
+    #tmp <- c(tmp, p$id)
+    #print(tmp)
   })
   
 }
