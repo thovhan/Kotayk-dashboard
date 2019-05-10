@@ -1,5 +1,5 @@
 # Installing the required packages
-required.packages = c("sf", "sp", "rgdal", "leaflet", "shiny")
+required.packages = c("sf", "sp", "rgdal", "leaflet", "shiny", "dplyr", "ggplot2")
 new.packages = required.packages[!(required.packages 
     %in% installed.packages()[, "Package"])]
 if (length(new.packages))
@@ -11,3 +11,4 @@ source("ui.R")
 source("server.R")
 
 shinyApp(ui, server)
+

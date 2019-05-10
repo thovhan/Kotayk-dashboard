@@ -1,13 +1,20 @@
 
 ui <- fluidPage(
   
+  landmarkTypeChoices = 
+  
   navbarPage( title = "Cadastre",
               
-              tabPanel( "Monuments",
-                        sidebarPanel(
-                          leafletOutput("kotaykMap")
-                        )
+              tabPanel( "Landmarks",
                         
+                        sidebarPanel(
+                          #htmlOutput("select_monument_type_UI"),
+                          leafletOutput("kotaykMap")
+                        ),
+                        mainPanel(
+                          plotOutput("kotayk_piechart_by_type"),
+                          plotOutput("kotayk_piechart_by_town")
+                        )
                         
                         
               ), # tablPanel - Kotayk
