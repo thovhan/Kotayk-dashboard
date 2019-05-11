@@ -64,9 +64,9 @@ kotayk_server <- function(input, output, session) {
     
     p <- kotaykData %>%group_by(type) %>%
       summarise(count=n()) %>%  top_n(10) %>%
-      ggplot(aes(x = "", y = count, fill = type)) +
-      geom_bar(width = 1, stat='identity') +
-      coord_polar("y", start=0)    
+      ggplot(aes(x = "type", y = count, fill = type)) +
+      geom_bar(width = 1, stat='identity')
+      #coord_polar("y", start=0)    
     p
   })
   

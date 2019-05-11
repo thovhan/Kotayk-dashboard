@@ -1,24 +1,38 @@
 
 ui <- fluidPage(
   
-  #landmarkTypeChoices = 
   
   navbarPage( title = "Cadastre",
               
               tabPanel( "Landmarks",
-                        fluidRow(
-                          
-                          column(7,
-                            htmlOutput("select_monument_type_UI"),
-                            leafletOutput("kotaykMap")
-                          ),
-                          column(5,
-                                 shinydashboard::box(width=4, height = 2, plotOutput("kotayk_piechart_by_type"), status="primary"),
-                                 shinydashboard::box(width=4, height = 2, plotOutput("kotayk_piechart_by_town"), status="primary")
-                          # plotOutput("kotayk_piechart_by_town")
-                          )
-                        )
-                        
+
+                      div(class="outer",
+
+                            tags$head(
+                              # Include our custom CSS
+                              includeCSS("styles.css"),
+                              includeScript("gomap.js")
+                            ),
+
+                            # If not using custom CSS, set height of leafletOutput to a number instead of percent
+                            leafletOutput("kotaykMap", width="100%", height="100%"),
+
+                            # Shiny versions prior to 0.11 should use class = "modal" instead.
+                            absolutePanel(id = "controls", class = "panel panel-default", fixed = TRUE,
+                              draggable = TRUE, top = 60, left = "auto", right = 20, bottom = "auto",
+                              width = 330, height = "auto",
+
+                              h2("Landmark explorer"),
+
+                              htmlOutput("select_monument_type_UI"),
+
+                              plotOutput("kotayk_piechart_by_type", height = 250)
+                            ),
+
+                            tags$div(id="cite",
+                              'Data compiled for ', tags$em('Coming Apart: The State of White America, 1960–2010'), ' by Charles Murray (Crown Forum, 2012).'
+                            )
+                          )                     
                         
                         
               ), # tablPanel - Kotayk
