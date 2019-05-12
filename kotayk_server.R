@@ -38,9 +38,27 @@ kotayk_server <- function(input, output, session) {
         char2dms %>%
         as.numeric
 
-      l <- l %>% 
-        addMarkers(lng = ~kotaykLon, lat = ~kotaykLat, 
-          clusterOptions = markerClusterOptions()
+      l <- l %>%
+        addMarkers(lng = ~kotaykLon, lat = ~kotaykLat,
+          clusterOptions = markerClusterOptions(),
+          label = mapply(
+            function(name, town, code, type) {
+              HTML(sprintf(
+                "<b>Name: </b> %s </br> 
+                <b>Town: </b> %s </br>
+                <b>Code: </b> %s </br>
+                <b>Type: </b> %s", 
+                name, town, code, type
+              ))
+            },
+            filteredData$town_name_armenian, filteredData$town_name_2, 
+            filteredData$code, 
+            mapping[mapping$Code == filteredData$type, ]$Name,
+            SIMPLIFY = F
+          ),
+          labelOptions = lapply(1:nrow(filteredData), function(x) {
+            labelOptions(direction = 'auto')
+          })
         )
     }
       l
