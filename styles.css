@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
 input[type="number"] {
   max-width: 80%;
 }
@@ -14,7 +16,7 @@ div.outer {
 
 /* Customize fonts */
 body, label, input, button, select { 
-  font-family: 'Helvetica Neue', Helvetica;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 200;
 }
 h1, h2, h3, h4 { font-weight: 400; }

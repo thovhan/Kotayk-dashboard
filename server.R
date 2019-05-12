@@ -1,6 +1,6 @@
 
 server <- function(input, output, session) {
-  
+  # Server for rendering the monument data for a state
   source("kotayk_server.R")
   kotayk_server(input, output, session)
   
@@ -9,10 +9,8 @@ server <- function(input, output, session) {
     cbind(rnorm(40) * 2 + 13, rnorm(40) + 48)
   }, ignoreNULL = FALSE)
   
-  
   shapeData <- readOGR("Armenia_Marzes", "Armenia_Marzes")
   shapeData <- spTransform(shapeData, CRS("+proj=longlat +datum=WGS84 +no_defs"))
-  
   
   output$Map <- renderLeaflet({
     leaflet(shapeData) %>%
@@ -23,12 +21,9 @@ server <- function(input, output, session) {
                                                       bringToFront = TRUE))
   })
   
-  
   observeEvent(input$Map_shape_click, { # update the location selectInput on map clicks
     p <- input$Map_shape_click
-    print(p$id) ## Id of the marz
-    #tmp <- c(tmp, p$id)
-    #print(tmp)
-  })
-  
+    output$cityControls <- renderText(p$id)
+    print(p$id)
+  })  
 }
