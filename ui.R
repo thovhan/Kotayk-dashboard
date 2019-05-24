@@ -12,7 +12,7 @@ ui <- fluidPage(title = "Cadastre Landmark Explorer",
           right = 20, bottom = "auto", width = 330, height = "auto",
         h2("Landmark explorer"),
         htmlOutput("select_monument_type_UI"),
-        plotOutput("kotayk_piechart_by_type", height = 250)
+        plotOutput("kotayk_chart_by_town", height = 450)
       )
     )  
   )

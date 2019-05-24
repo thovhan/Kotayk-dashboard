@@ -78,5 +78,26 @@ kotayk_server <- function(input, output, session) {
       geom_bar(width = 1, stat='identity') +
       coord_polar("y", start=0)
   })
+  
+  output$kotayk_chart_by_town <-renderPlot({
+    
+    myData  <- kotaykData
+    
+    if ( length(input$monTypes) > 0 ) {
+      monumentCodes <- mapping[mapping$Name %in% input$monTypes, ]$Code
+        myData <- kotaykData[kotaykData$type %in% monumentCodes, ]
+    }
+    
+    myData %>% group_by(town_name_eng) %>%
+      summarise(count=n()) %>%  top_n(10) %>%
+      ggplot(aes(x = town_name_eng, y = count, fill = town_name_eng)) +
+      geom_bar(width = 1, stat='identity') +
+      theme(legend.direction = "vertical",legend.position = "bottom",axis.title.x=element_blank(), axis.text.x=element_blank(), 
+            axis.ticks.x=element_blank()) +
+      guides(fill=guide_legend(title="Towns")) +
+      ggtitle("Landmark distribution by town") +
+      ylab("Landmark quantity")# + 
+      #xlab("NEW DENSITY TITLE")
+  })
 
 }
